@@ -11,9 +11,9 @@ namespace GZipTest
 {
     public class TrafficController
     {
-        //потокобезопасная очередь для обмена блоками между потоком записи и потоками конвертера
+        //потокобезопасная очередь для обмена блоками между потоком чтения и потоками конвертера
         private ThreadSafeQueue readBlocks = null;
-        //потокобезопасная очередь для обмена блоками между потоками конвертера и потоками конвертера
+        //потокобезопасная очередь для обмена блоками между потоками конвертера и потоками записи
         private ThreadSafeQueue blocks2Write = null;
         private Thread[] threads = new Thread[EnvironParameters.threadsCount];//массив потоков конвертера
         //массив событий-сигналов, используется для определени, что потоки отработали
@@ -86,7 +86,7 @@ namespace GZipTest
             //завершаем отчёт в консоль и в лог-файл
             GenerateReportsComplettion(isSomethingWrong); 
 
-            //возращаем результат, согласно ТЗ
+            //возращаем результат 
             return isSomethingWrong ? 0 : 1;
        }
 
